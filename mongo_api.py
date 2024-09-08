@@ -32,5 +32,5 @@ class MongoAPI:
 
     def list_files_metadata(self):
         files = self.collection.find()
-        return [{'file_id': str(file['_id']), 'file_name': file['file_name'], 'metadata': file.get('metadata')} for file in files]
+        return [{key: value for key, value in file.items() if key != '_id'} for file in files]
 
